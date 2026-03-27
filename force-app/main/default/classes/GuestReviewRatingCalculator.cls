@@ -8,7 +8,7 @@ public class GuestReviewRatingCalculator {
         Map<String, ConnectApi.WrappedValue> inputParams = new Map<String, ConnectApi.WrappedValue>();
         
         //TO-DO Configure Prompt Template Input API Name(Input:experience)
-        inputParams.put('REPLACE_WITH_PROMPT_TEMPLATE_INPUT', experienceValue);
+        inputParams.put('Input:experience', experienceValue);
 
         // Configure invocation parameters
         ConnectApi.EinsteinPromptTemplateGenerationsInput executeTemplateInput = new ConnectApi.EinsteinPromptTemplateGenerationsInput();
@@ -19,10 +19,13 @@ public class GuestReviewRatingCalculator {
         
         try {
             //TO-DO Call the service generateMessagesForPromptTemplate to generate response by specifying the prompt template API name and input parameters
-            ConnectApi.EinsteinPromptTemplateGenerationsRepresentation generationsOutput;
+            ConnectApi.EinsteinPromptTemplateGenerationsRepresentation generationsOutput = ConnectApi.EinsteinLLM.generateMessagesForPromptTemplate(
+                'Experience_Guest_Reviews_Evaluator',
+                executeTemplateInput
+            );
             
             //TO-DO Extract the response text from generations property
-            ConnectApi.EinsteinLLMGenerationItemOutput response;
+            ConnectApi.EinsteinLLMGenerationItemOutput response = generationsOutput.generations[0];
 
             //Deserialize the response 
             Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(response.text);
