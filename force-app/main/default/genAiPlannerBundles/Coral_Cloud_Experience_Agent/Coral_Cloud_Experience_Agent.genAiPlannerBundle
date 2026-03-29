@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlannerBundle xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <description>This is the Coral Cloud Agent that helps customers learn more about Experiences as well as book sessions.</description>
+    <localActionLinks>
+        <genAiFunctionName>AnswerQuestionsWithKnowledge_16jg80000003cdT</genAiFunctionName>
+    </localActionLinks>
+    <localTopicLinks>
+        <genAiPluginName>Customer_Experience_Reviews_16jg80000003cdT</genAiPluginName>
+    </localTopicLinks>
+    <localTopics>
+        <fullName>Customer_Experience_Reviews_16jg80000003cdT</fullName>
+        <canEscalate>false</canEscalate>
+        <description>This topic handles guest reviews about their experience at Coral Cloud Resorts. It identifies the specific experience, processes customer feedback, and records their review in the Coral Cloud Resorts org.</description>
+        <developerName>Customer_Experience_Reviews_16jg80000003cdT</developerName>
+        <genAiPluginInstructions>
+            <description>Always begin by checking that the Email__c field on the MessagingSession record is available with the session. If the Email__c field is available, then use this value to get the Contact record. If the Email__c field value is not known, always ask the customer for their email address and get their Contact record before creating the Guest Reviews record from the customer.</description>
+            <developerName>instruction_1</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 1</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Get the Contact record by using the Lookup Contact by Email action. Then get the most recent Booking information by using the Get Most Recent Booking by Contact action.</description>
+            <developerName>instruction_2</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 2</masterLabel>
+            <sortOrder>2</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>There&apos;s an Experience Name field in the Booking record retrieved from the Get Most Recent Booking by Contact action. Confirm with the customer that the review they want to submit is for the experience related to this booking.</description>
+            <developerName>instruction_3</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 3</masterLabel>
+            <sortOrder>3</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>If the experience name is not what the customer intends to provide a review for, ask the user for their experience name. Check that the Booking record with this experience name exists for the customer, then confirm the experience name with the customer.</description>
+            <developerName>instruction_4</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 4</masterLabel>
+            <sortOrder>4</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Use the Experience Name field on the Booking record to call the Lookup Experience action to get the Experience__c record.</description>
+            <developerName>instruction_5</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 5</masterLabel>
+            <sortOrder>5</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Prompt the user to provide their review and a numeric rating on a scale of 1-10, with 10 being the most favorable rating. If the user submits a decimal rating, round it to the nearest whole number. Once both the review and the rating are received, invoke the Process_Guest_Reviews action with the collected details.</description>
+            <developerName>instruction_6</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>Instruction 6</masterLabel>
+            <sortOrder>6</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>Lookup_Experience_179g8000000CUlV</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>Lookup_Contact_by_Email_179g8000000CUlV</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>Get_Most_Recent_Booking_by_Contact_179g8000000CUlV</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>Get_Most_Recent_Booking_by_Contact_179g8000000CUlV</fullName>
+            <description>This flow gets the most recent Booking for a Contact based on the Date of the booking.</description>
+            <developerName>Get_Most_Recent_Booking_by_Contact_179g8000000CUlV</developerName>
+            <invocationTarget>Get_Most_Recent_Booking_by_Contact</invocationTarget>
+            <invocationTargetType>flow</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>false</isIncludeInProgressIndicator>
+            <localDeveloperName>Get_Most_Recent_Booking_by_Contact</localDeveloperName>
+            <masterLabel>Get Most Recent Booking by Contact</masterLabel>
+            <source>Get_Most_Recent_Booking_by_Contact</source>
+        </localActions>
+        <localActions>
+            <fullName>Lookup_Contact_by_Email_179g8000000CUlV</fullName>
+            <description>Retrieve Contact record based on an email address.</description>
+            <developerName>Lookup_Contact_by_Email_179g8000000CUlV</developerName>
+            <invocationTarget>Lookup_Contact_by_Email</invocationTarget>
+            <invocationTargetType>flow</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>false</isIncludeInProgressIndicator>
+            <localDeveloperName>Lookup_Contact_by_Email</localDeveloperName>
+            <masterLabel>Lookup Contact by Email</masterLabel>
+            <source>Lookup_Contact_by_Email</source>
+        </localActions>
+        <localActions>
+            <fullName>Lookup_Experience_179g8000000CUlV</fullName>
+            <description>Retrieve Experience record based on user input.</description>
+            <developerName>Lookup_Experience_179g8000000CUlV</developerName>
+            <invocationTarget>Lookup_Experience</invocationTarget>
+            <invocationTargetType>flow</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>false</isIncludeInProgressIndicator>
+            <localDeveloperName>Lookup_Experience</localDeveloperName>
+            <masterLabel>Lookup Experience</masterLabel>
+            <source>Lookup_Experience</source>
+        </localActions>
+        <localDeveloperName>Customer_Experience_Reviews</localDeveloperName>
+        <masterLabel>Customer Experience Reviews</masterLabel>
+        <pluginType>Topic</pluginType>
+        <scope>Your sole job is to gather and process guest reviews about their experiences at Coral Cloud Resorts to ensure feedback is accurately recorded and categorized.</scope>
+    </localTopics>
+    <masterLabel>Coral Cloud Experience Agent</masterLabel>
+    <plannerActions>
+        <fullName>AnswerQuestionsWithKnowledge_16jg80000003cdT</fullName>
+        <description>Answers questions about company policies and procedures, troubleshooting steps, or product information. For example: “What is your return policy?” “How do I fix an issue?” or “What features does a product have?”</description>
+        <developerName>AnswerQuestionsWithKnowledge_16jg80000003cdT</developerName>
+        <invocationTarget>streamKnowledgeSearch</invocationTarget>
+        <invocationTargetType>standardInvocableAction</invocationTargetType>
+        <isConfirmationRequired>false</isConfirmationRequired>
+        <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+        <localDeveloperName>AnswerQuestionsWithKnowledge</localDeveloperName>
+        <masterLabel>Answer Questions with Knowledge</masterLabel>
+        <progressIndicatorMessage>Getting answers</progressIndicatorMessage>
+        <source>EmployeeCopilot__AnswerQuestionsWithKnowledge</source>
+    </plannerActions>
+    <plannerSurfaces>
+        <adaptiveResponseAllowed>true</adaptiveResponseAllowed>
+        <callRecordingAllowed>false</callRecordingAllowed>
+        <outboundRouteConfigs>
+            <escalationMessage>One moment while I connect you to the next available service representative.</escalationMessage>
+            <outboundRouteName>ESA_Route_to_Queue</outboundRouteName>
+            <outboundRouteType>OmniChannelFlow</outboundRouteType>
+        </outboundRouteConfigs>
+        <surface>SurfaceAction__CustomerWebClient</surface>
+        <surfaceType>CustomerWebClient</surfaceType>
+    </plannerSurfaces>
+    <plannerType>AiCopilot__ReAct</plannerType>
+</GenAiPlannerBundle>
